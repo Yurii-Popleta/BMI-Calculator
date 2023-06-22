@@ -2,9 +2,6 @@
 import UIKit
 
 struct CalculatorBrain {
-    
-    //MARK: - Changing the parameters of the structure BMI based on user data which we get in CalculateViewController.
-    
     var bmi: BMI?
     
     mutating func calculateBMI(height: Float, weight: Float) {
@@ -18,18 +15,13 @@ struct CalculatorBrain {
             bmi = BMI(value: bmiValue, advice: "Eat less pies!", color: UIColor(named: "customRed")!)
         }
     }
-    
-    //MARK: - Send BMIValue, Advice and Color to the CalculateViewController.
-    
     func getBMIValue() -> String {
         let bmiTo1DecimalPlace = String(format: "%.1f", bmi?.value ?? 0.0)
         return bmiTo1DecimalPlace
     }
-    
     func getAdvice() -> String {
         return bmi?.advice ?? "No advice"
     }
-    
     func getColor() -> UIColor {
         return bmi?.color ?? .clear
     }
