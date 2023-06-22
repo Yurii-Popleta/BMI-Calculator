@@ -103,8 +103,8 @@ import SnapKit
             make.trailing.equalToSuperview().offset(-100)
         }
         stackView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
+            make.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
+            make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-20)
             make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-10)
         }
         calcButton.snp.makeConstraints { make in
