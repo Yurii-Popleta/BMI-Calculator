@@ -16,6 +16,8 @@
 		84B9ED6228ED9F15004DC35F /* BMI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B9ED6128ED9F15004DC35F /* BMI.swift */; };
 		84B9ED6428ED9F46004DC35F /* CalculatorBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B9ED6328ED9F46004DC35F /* CalculatorBrain.swift */; };
 		84B9ED6628ED9F9C004DC35F /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B9ED6528ED9F9C004DC35F /* ResultViewController.swift */; };
+		84D7C70D2A44339E00578079 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 84D7C70C2A44339E00578079 /* SnapKit */; };
+		84F531672A443BD200C33356 /* NestedStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F531662A443BD200C33356 /* NestedStackView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,7 @@
 		84B9ED6128ED9F15004DC35F /* BMI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMI.swift; sourceTree = "<group>"; };
 		84B9ED6328ED9F46004DC35F /* CalculatorBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorBrain.swift; sourceTree = "<group>"; };
 		84B9ED6528ED9F9C004DC35F /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
+		84F531662A443BD200C33356 /* NestedStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedStackView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84D7C70D2A44339E00578079 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +72,7 @@
 				84B9ED5E28ED9ED1004DC35F /* View */,
 				84B9ED5F28ED9ED6004DC35F /* Controller */,
 				849ABA9B28ED9D70008B6F2C /* Assets.xcassets */,
+				849ABA9828ED9D6E008B6F2C /* Main.storyboard */,
 				849ABA9D28ED9D70008B6F2C /* LaunchScreen.storyboard */,
 				849ABAA028ED9D70008B6F2C /* Info.plist */,
 			);
@@ -77,7 +82,7 @@
 		84B9ED5E28ED9ED1004DC35F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				849ABA9828ED9D6E008B6F2C /* Main.storyboard */,
+				84F531662A443BD200C33356 /* NestedStackView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -116,6 +121,9 @@
 			dependencies = (
 			);
 			name = "BMI-Calculator";
+			packageProductDependencies = (
+				84D7C70C2A44339E00578079 /* SnapKit */,
+			);
 			productName = "BMI-Calculator";
 			productReference = 849ABA8F28ED9D6E008B6F2C /* BMI-Calculator.app */;
 			productType = "com.apple.product-type.application";
@@ -144,6 +152,9 @@
 				Base,
 			);
 			mainGroup = 849ABA8628ED9D6E008B6F2C;
+			packageReferences = (
+				84D7C70B2A44339E00578079 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 849ABA9028ED9D6E008B6F2C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -176,6 +187,7 @@
 				849ABA9328ED9D6E008B6F2C /* AppDelegate.swift in Sources */,
 				84B9ED6428ED9F46004DC35F /* CalculatorBrain.swift in Sources */,
 				849ABA9528ED9D6E008B6F2C /* SceneDelegate.swift in Sources */,
+				84F531672A443BD200C33356 /* NestedStackView.swift in Sources */,
 				84B9ED6628ED9F9C004DC35F /* ResultViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -394,6 +406,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		84D7C70B2A44339E00578079 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		84D7C70C2A44339E00578079 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 84D7C70B2A44339E00578079 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 849ABA8728ED9D6E008B6F2C /* Project object */;
 }

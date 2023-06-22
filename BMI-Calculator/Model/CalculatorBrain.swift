@@ -9,13 +9,13 @@ struct CalculatorBrain {
     
     mutating func calculateBMI(height: Float, weight: Float) {
         let bmiValue = weight / (height * height)
-
+        
         if bmiValue < 18.5 {
-            bmi = BMI(value: bmiValue, advice: "Eat more pies!", color: .blue)
+            bmi = BMI(value: bmiValue, advice: "Eat more pies!", color: UIColor(named: "customBlue")!)
         } else if bmiValue < 24.9 {
-            bmi = BMI(value: bmiValue, advice: "Fit as a fiddle!", color: .green)
+            bmi = BMI(value: bmiValue, advice: "Fit as a fiddle!", color: UIColor(named: "customGreen")!)
         } else {
-            bmi = BMI(value: bmiValue, advice: "Eat less pies!", color: .red)
+            bmi = BMI(value: bmiValue, advice: "Eat less pies!", color: UIColor(named: "customRed")!)
         }
     }
     

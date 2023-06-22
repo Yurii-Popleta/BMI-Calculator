@@ -1,52 +1,128 @@
 import UIKit
+import SnapKit
 
-class CalculateViewController: UIViewController {
-    
-    var calculatorBrain = CalculatorBrain()
-
-    @IBOutlet weak var heightLabel: UILabel!
-    @IBOutlet weak var weightLabel: UILabel!
-    @IBOutlet weak var heightSlider: UISlider!
-    @IBOutlet weak var weightSlider: UISlider!
+ class CalculateViewController: UIViewController {
+     private var calculatorBrain = CalculatorBrain()
+     private let background: UIImageView = {
+        let imageView = UIImageView()
+         imageView.image = UIImage(named: "calculate_background")
+         imageView.contentMode = .scaleAspectFill
+         return imageView
+     }()
+     private let topLabel: UILabel = {
+        let label = UILabel()
+         label.textAlignment = .left
+         label.font = .systemFont(ofSize: 40, weight: .bold)
+         label.text = "CALCULATE YOUR BMI"
+         label.textColor = .darkGray
+         label.numberOfLines = 0
+         return label
+     }()
+     private let stackView: UIStackView = {
+         let stackView = UIStackView()
+         stackView.axis = .vertical
+         stackView.alignment = .fill
+         stackView.distribution = .fill
+         stackView.spacing = 22
+         return stackView
+     }()
+     private let nestedStackView: NestedStackView = {
+         let stackView = NestedStackView()
+         stackView.leftLabel.text = "Height"
+         stackView.rightLabel.text = "1.5m"
+         stackView.axis = .horizontal
+         stackView.alignment = .fill
+         stackView.distribution = .fill
+         return stackView
+     }()
+     private var heightSlider: UISlider = {
+        let slider = UISlider()
+         slider.minimumValue = 0
+         slider.maximumValue = 3
+         slider.value = 1.5
+         slider.minimumTrackTintColor = UIColor(named: "custom1")
+         slider.thumbTintColor = UIColor(named: "custom2")
+         return slider
+     }()
+     private let nestedStackView2: NestedStackView = {
+         let stackView = NestedStackView()
+         stackView.leftLabel.text = "Weight"
+         stackView.rightLabel.text = "100Kg"
+         stackView.axis = .horizontal
+         stackView.alignment = .fill
+         stackView.distribution = .fill
+         return stackView
+     }()
+     private let weightSlider: UISlider = {
+        let slider = UISlider()
+         slider.minimumValue = 0
+         slider.maximumValue = 200
+         slider.value = 100
+         slider.minimumTrackTintColor = UIColor(named: "custom1")
+         slider.thumbTintColor = UIColor(named: "custom2")
+         return slider
+     }()
+     private let calcButton: UIButton = {
+        let button = UIButton()
+         button.setTitle("CALCULATE", for: .normal)
+         button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+         button.backgroundColor = UIColor(named: "custom3")
+         button.layer.cornerRadius = 20
+         return button
+     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        style()
+        layout()
+        setup()
     }
-
-    //MARK: - Changing Labels text on screan on what user chose on sliders.
-    
-    @IBAction func heightSliderChanged(_ sender: UISlider) {
-        let height = String(format: "%.2f", sender.value)
-        heightLabel.text = "\(height)m"
-    }
-    
-    @IBAction func weightSliderChanged(_ sender: UISlider) {
-        let weight = String(format: "%.0f", sender.value)
-        weightLabel.text = "\(weight)Kg"
-    }
-    
-    //MARK: - Send to the CalculatorBrain user data:  height and weight when user press button
-    
-    @IBAction func calculatePressed(_ sender: UIButton) {
-        let height = heightSlider.value
-        let weight = weightSlider.value
-        calculatorBrain.calculateBMI(height: height, weight: weight)
-        
-        //MARK: - go to the second screen
-        
-        performSegue(withIdentifier: "goToResult", sender: self)
-    }
-    
-    //MARK: - change parameters on second screen before user see its
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "goToResult" {
-            let destinationVC = segue.destination as! ResultViewController
-          
-            destinationVC.bmiValue = calculatorBrain.getBMIValue()
-            destinationVC.advice = calculatorBrain.getAdvice()
-            destinationVC.color = calculatorBrain.getColor()
+     
+     func setup() {
+         calcButton.addTarget(self, action: #selector(calcAction), for: .touchUpInside)
+         heightSlider.addTarget(self, action: #selector(heightValueChanged(_:)), for: .valueChanged)
+         weightSlider.addTarget(self, action: #selector(weightValueChanged(_:)), for: .valueChanged)
+     }
+    func style() {
+        view.addSubview(background)
+        view.addSubview(topLabel)
+        view.addSubview(stackView)
+        stackView.addArrangedSubview(nestedStackView)
+        stackView.addArrangedSubview(heightSlider)
+        stackView.addArrangedSubview(nestedStackView2)
+        stackView.addArrangedSubview(weightSlider)
+        stackView.addArrangedSubview(calcButton)
+     }
+    func layout() {
+         background.snp.makeConstraints { make in
+             make.leading.top.trailing.bottom.equalToSuperview()
+         }
+        topLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(20)
+            make.centerY.equalToSuperview().offset(-130)
+            make.trailing.equalToSuperview().offset(-100)
         }
-    }
-    
+        stackView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-10)
+        }
+        calcButton.snp.makeConstraints { make in
+            make.height.equalTo(50)
+        }
+     }
+     
+     @objc func calcAction(sender: UIButton) {
+         calculatorBrain.calculateBMI(height: heightSlider.value, weight: weightSlider.value)
+         let resultVC = ResultViewController()
+         resultVC.configure(bmiValue: calculatorBrain.getBMIValue(), advice: calculatorBrain.getAdvice(), color: calculatorBrain.getColor())
+         resultVC.modalPresentationStyle = .popover
+         self.present(resultVC, animated: true)
+     }
+     @objc func heightValueChanged(_ sender: UISlider) {
+         nestedStackView.rightLabel.text = String(format: "%.2f", sender.value)
+     }
+     @objc func weightValueChanged(_ sender: UISlider) {
+         nestedStackView2.rightLabel.text = String(format: "%.0f", sender.value)
+     }
 }
