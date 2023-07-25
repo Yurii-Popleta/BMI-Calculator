@@ -2,7 +2,7 @@ import UIKit
 import SnapKit
 
  class CalculateViewController: UIViewController {
-     private var calculatorBrain = CalculatorBrain()
+     private var calculator = Calculator()
      private let background: UIImageView = {
         let imageView = UIImageView()
          imageView.image = UIImage(named: "calculate_background")
@@ -113,9 +113,9 @@ import SnapKit
      }
      
      @objc func calcAction(sender: UIButton) {
-         calculatorBrain.calculateBMI(height: heightSlider.value, weight: weightSlider.value)
+         calculator.calculateBMI(height: heightSlider.value, weight: weightSlider.value)
          let resultVC = ResultViewController()
-         resultVC.configure(bmiValue: calculatorBrain.getBMIValue(), advice: calculatorBrain.getAdvice(), color: calculatorBrain.getColor())
+         resultVC.configure(bmiValue: calculator.getBMIValue(), advice: calculator.getAdvice(), color: calculator.getColor())
          resultVC.modalPresentationStyle = .popover
          self.present(resultVC, animated: true)
      }

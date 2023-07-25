@@ -1,10 +1,3 @@
-//
-//  NestedStackView.swift
-//  BMI-Calculator
-//
-//  Created by Admin on 22/06/2023.
-//
-
 import UIKit
 
 class NestedStackView: UIStackView {
@@ -20,7 +13,6 @@ class NestedStackView: UIStackView {
         label.textColor = .darkGray
         return label
     }()
-    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         addArrangedSubview(leftLabel)

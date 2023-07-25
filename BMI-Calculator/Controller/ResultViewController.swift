@@ -1,4 +1,3 @@
-
 import UIKit
 import SnapKit
 
@@ -83,7 +82,6 @@ class ResultViewController: UIViewController {
             make.height.equalTo(50)
         }
     }
-   
     @objc func closeAction() {
         dismiss(animated: true, completion: nil)
     }
